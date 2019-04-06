@@ -1,0 +1,59 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="szablon.xhtml"
+>
+	<ui:define name="tresc">
+		<h3>Lista ksiązek</h3>
+		
+		<h:form rendered="#{zalogowanyBB.jestAdminem()}" style="margin-bottom: 20px;">
+			<h:commandLink value="Dodaj nową ksiązkę" action="dodaj" styleClass="pure-button" />
+		</h:form>
+		
+		<h:form>
+			<p:inputText value="#{wyszukiwarkaBB.fraza}" />
+			<p:commandButton action="#{wyszukiwarkaBB.szukaj()}" value="Szukaj" style="margin-left: 10px;" />
+		</h:form>
+		
+		<p:dataTable var="ksiazka" value="#{listaKsiazekBB.ksiazki}" paginator="true" rows="3" emptyMessage="Brak ksiązek." style="margin-top: 20px;">
+			<p:column headerText="Tytuł">
+				<h:outputText value="#{ksiazka.tytul}" />
+			</p:column>
+			<p:column headerText="Autor">
+				<h:outputText value="#{ksiazka.autor}" />
+			</p:column>
+			<p:column headerText="Opis">
+				<h:outputText value="#{ksiazka.opis}" />
+			</p:column>
+			<p:column headerText="Cena">
+				<h:outputText value="#{ksiazka.cena} PLN" />
+			</p:column>
+			<p:column style="text-align: center; padding: 10px;">
+				<h:form style="margin-bottom: 10px;" rendered="#{koszykBB.jestWKoszyku(ksiazka) == false}">
+					<p:commandButton value="Dodaj do koszyka" action="#{listaKsiazekBB.dodajDoKoszyka(ksiazka)}" style="width: 100%;" />
+				</h:form>
+				
+				<h:form style="margin-bottom: 10px;" rendered="#{koszykBB.jestWKoszyku(ksiazka) == true}">
+					<p:commandButton value="Usuń z koszyka" action="#{listaKsiazekBB.usunZKoszyka(ksiazka)}" style="width: 100%;" />
+				</h:form>
+				
+				<h:panelGroup rendered="#{zalogowanyBB.jestAdminem()}">
+					<h:form style="margin-bottom: 10px;">
+						<p:commandButton value="Edytuj" action="#{listaKsiazekBB.edytuj(ksiazka)}" style="width: 100%;" />
+					</h:form>
+					
+					<h:form rendered="#{not ksiazka.jestZarchiwizowana()}">
+						<p:commandButton value="Archiwizuj" action="#{listaKsiazekBB.archiwizuj(ksiazka)}" style="width: 100%;" />
+					</h:form>
+					
+					<h:form rendered="#{ksiazka.jestZarchiwizowana()}">
+						<p:commandButton value="Cofnij archiwizację" action="#{listaKsiazekBB.cofnijArchiwizacje(ksiazka)}" style="width: 100%;" />
+					</h:form>
+				</h:panelGroup>
+			</p:column>
+		</p:dataTable>
+	</ui:define>
+</ui:composition>

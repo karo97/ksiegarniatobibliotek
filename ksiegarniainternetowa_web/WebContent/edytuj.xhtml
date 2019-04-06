@@ -1,0 +1,30 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="szablon.xhtml"
+>
+	<ui:define name="tresc">
+		<h3>Edycja informacji o ksiązce</h3>
+		
+		<p:messages id="messages" />
+		
+		<h:form styleClass="pure-form pure-form-stacked">
+			<h:outputLabel value="Tytuł:" />
+			<h:inputText value="#{edycjaKsiazkiBB.ksiazka.tytul}" required="true" requiredMessage="Podaj tytuł!" />
+	        
+	        <h:outputLabel value="Autor:" />
+			<h:inputText value="#{edycjaKsiazkiBB.ksiazka.autor}" required="true" requiredMessage="Podaj autora!" />
+			
+			<h:outputLabel value="Opis:" />
+			<h:inputTextarea value="#{edycjaKsiazkiBB.ksiazka.opis}" required="true" requiredMessage="Podaj opis!" />
+		
+	        <h:outputLabel value="Cena:" />
+			<h:inputText value="#{edycjaKsiazkiBB.ksiazka.cena}" required="true" requiredMessage="Podaj cenę!" />
+	        
+	        <p:commandButton value="Zaktualizuj ksiązkę" action="#{edycjaKsiazkiBB.zaktualizuj()}" update="messages" styleClass="pure-button" style="margin-top: 10px;" />
+		</h:form>
+	</ui:define>
+</ui:composition>

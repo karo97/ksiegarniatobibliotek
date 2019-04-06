@@ -1,0 +1,24 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="szablon.xhtml"
+>
+	<ui:define name="tresc">
+		<h3>Logowanie</h3>
+		
+		<p:messages id="messages" />
+		
+		<h:form styleClass="pure-form pure-form-stacked">
+			<h:outputLabel value="Login:" />
+			<h:inputText value="#{loginBB.login}" required="true" requiredMessage="Podaj login!" />
+	        
+	        <h:outputLabel value="Hasło:" />
+	       	<h:inputSecret value="#{loginBB.haslo}" required="true" requiredMessage="Podaj hasło!" />
+	        
+	        <p:commandButton value="Zaloguj się" action="#{loginBB.login()}" update="messages" styleClass="pure-button" style="margin-top: 10px;" />
+		</h:form>
+	</ui:define>
+</ui:composition>

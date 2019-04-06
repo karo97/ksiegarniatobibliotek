@@ -1,0 +1,30 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="szablon.xhtml"
+>
+	<ui:define name="tresc">
+		<h3>Dodaj nową ksiązkę</h3>
+		
+		<p:messages id="messages" />
+		
+		<h:form styleClass="pure-form pure-form-stacked" id="dodaj">
+			<h:outputLabel value="Tytuł:" />
+			<h:inputText value="#{dodajKsiazkeBB.tytul}" required="true" requiredMessage="Podaj tytuł!" />
+	        
+	        <h:outputLabel value="Autor:" />
+			<h:inputText value="#{dodajKsiazkeBB.autor}" required="true" requiredMessage="Podaj autora!" />
+			
+			<h:outputLabel value="Opis:" />
+			<h:inputTextarea value="#{dodajKsiazkeBB.opis}" required="true" requiredMessage="Podaj opis!" />
+		
+	        <h:outputLabel value="Cena:" />
+			<h:inputText value="#{dodajKsiazkeBB.cena}" required="true" requiredMessage="Podaj cenę!" />
+	        
+	        <p:commandButton value="Dodaj ksiązkę" action="#{dodajKsiazkeBB.dodaj()}" update="messages" styleClass="pure-button" style="margin-top: 10px;" />
+		</h:form>
+	</ui:define>
+</ui:composition>

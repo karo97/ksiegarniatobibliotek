@@ -1,0 +1,40 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="szablon.xhtml"
+>
+	<ui:define name="tresc">
+		<h3>Moje zamówienia</h3>
+		
+		<p:dataGrid var="zamowienie" value="#{mojeZamowieniaBB.zamowienia}" columns="1" layout="grid" rows="2" paginator="true" emptyMessage="Brak zamówień.">
+	        <p:panel style="text-align: center;">
+	            <f:facet name="header">
+	            	Zamówienie o identyfikatorze ##{zamowienie.id}, złożone dnia: <h:outputText value="#{zamowienie.data}"><f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" /></h:outputText>, o wartości: #{zamowienie.cena} PLN
+	            </f:facet>
+	            
+	            <h:panelGrid columns="1">
+	            	<p:dataTable var="pozycja" value="#{zamowienie.zamowienieKsiazkas}">
+					    <p:column headerText="ID">
+					        <h:outputText value="#{pozycja.ksiazka.id}" />
+					    </p:column>
+					 
+					    <p:column headerText="Tytuł">
+					        <h:outputText value="#{pozycja.ksiazka.tytul}" />
+					    </p:column>
+					 
+					    <p:column headerText="Autor">
+					        <h:outputText value="#{pozycja.ksiazka.autor}" />
+					    </p:column>
+					 
+					    <p:column headerText="Cena">
+					        <h:outputText value="#{pozycja.ksiazka.cena} PLN" />
+					    </p:column>
+					</p:dataTable>
+	            </h:panelGrid>
+	        </p:panel>
+	    </p:dataGrid>
+	</ui:define>
+</ui:composition>

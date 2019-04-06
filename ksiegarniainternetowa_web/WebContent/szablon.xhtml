@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+>
+	<h:head>
+		<title>Księgarnia internetowa</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<h:outputStylesheet library="css" name="pure-min.css"></h:outputStylesheet>
+		<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	</h:head>
+	<h:body>
+		<div class="pure-menu pure-menu-horizontal">
+			<p:link outcome="index" value="Księgarnia internetowa" styleClass="pure-menu-heading pure-menu-link" />
+		    <ul class="pure-menu-list">
+		    	<h:panelGroup rendered="#{not empty zalogowanyBB.id}">
+		    		<li class="pure-menu-item">
+		    			<p:link outcome="koszyk" value="Koszyk" styleClass="pure-menu-link" />
+		    		</li>
+		    		<li class="pure-menu-item">
+		    			<p:link outcome="moje_zamowienia" value="Moje zamówienia" styleClass="pure-menu-link" />
+		    		</li>
+		    		<h:panelGroup rendered="#{zalogowanyBB.jestAdminem()}">
+		    			<li class="pure-menu-item">
+			    			<p:link outcome="zlozone_zamowienia" value="Złozone zamówienia" styleClass="pure-menu-link" />
+			    		</li>
+		    		</h:panelGroup>
+			        <li class="pure-menu-item">
+				        <h:form>
+		      				<h:commandLink action="#{loginBB.wyloguj()}" value="Wyloguj się" styleClass="pure-menu-link" />
+		      			</h:form> 
+			        </li>
+		        </h:panelGroup>
+		    </ul>
+		</div>
+		<ui:insert name="tresc" />
+	</h:body>
+</html>

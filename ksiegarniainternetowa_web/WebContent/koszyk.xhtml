@@ -1,0 +1,36 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="szablon.xhtml"
+>
+	<ui:define name="tresc">
+		<h3>Koszyk</h3>
+		
+		<p:dataTable var="ksiazka" value="#{koszykBB.ksiazki}" paginator="true" rows="3" emptyMessage="Koszyk jest pusty.">
+			<p:column headerText="Tytuł">
+				<h:outputText value="#{ksiazka.tytul}" />
+			</p:column>
+			<p:column headerText="Autor">
+				<h:outputText value="#{ksiazka.autor}" />
+			</p:column>
+			<p:column headerText="Opis">
+				<h:outputText value="#{ksiazka.opis}" />
+			</p:column>
+			<p:column headerText="Cena">
+				<h:outputText value="#{ksiazka.cena} PLN" />
+			</p:column>
+			<p:column>
+				<h:form>
+					<p:commandButton value="Usuń z koszyka" action="#{koszykBB.usun(ksiazka)}" style="width: 100%;" />
+				</h:form>
+			</p:column>
+		</p:dataTable>
+		
+		<h:form style="margin-top: 20px;" rendered="#{not empty koszykBB.ksiazki}">
+			<p:commandButton value="Dokonaj zakupu" action="#{koszykBB.zakup()}" />
+		</h:form>
+	</ui:define>
+</ui:composition>
